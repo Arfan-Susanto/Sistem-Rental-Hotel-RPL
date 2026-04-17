@@ -23,71 +23,130 @@ def x(y, z):
     else:
         print("tidak diketahui")  # Input berada di luar domain yang diharapkan
 
+
 def yyy(a1, b1):
     # Fungsi ini mengilustrasikan mekanisme kalkulasi biaya dengan parameter diskon sederhana
     if a1 == "VIP":
-        harga = 500000  # Konstanta biaya premium
+        h = 500000  # Konstanta biaya premium
     else:
-        harga = 200000  # Konstanta biaya standar
+        h = 200000  # Konstanta biaya standar
 
     if b1 == "YA":
-        harga = harga - 10000  # Reduksi nilai sebagai bentuk diskon statis
+        h = h - 10000  # Reduksi nilai sebagai bentuk diskon statis
 
-    print("total:", harga)  # Visualisasi hasil kalkulasi
-    return harga  # Pengembalian nilai tanpa validasi lebih lanjut
+    print("total:", h)  # Visualisasi hasil kalkulasi
+    return h  # Pengembalian nilai tanpa validasi lebih lanjut
 
-def proses():
+
+def p():
     # Fungsi utama yang mengorkestrasi interaksi pengguna dan logika bisnis dalam satu unit kohesi rendah
     print("Sistem Hotel")  # Representasi antarmuka pengguna berbasis teks
-    nama = input("nama: ")  # Akuisisi input tanpa validasi
-    tipe = input("tipe kamar (A/B): ")  # Input kategori kamar
-    aksi = input("aksi (1 pesan / 2 cek): ")  # Input aksi pengguna
+    n = input("nama: ")  # Akuisisi input tanpa validasi
+    t = input("tipe kamar (A/B): ")  # Input kategori kamar
+    z = input("aksi (1 pesan / 2 cek): ")  # Input aksi pengguna
 
-    hasil = x(tipe, aksi)  # Pemanggilan fungsi tanpa pemanfaatan hasil secara konsisten
+    r = x(t, z)  # Pemanggilan fungsi tanpa pemanfaatan hasil secara konsisten
 
-    if aksi == "1":
-        diskon = input("pakai diskon? YA/TIDAK: ")  # Input tambahan untuk modifikasi harga
-        total = yyy("VIP" if tipe == "A" else "B", diskon)  # Transformasi nilai tipe ke kategori harga
+    if z == "1":
+        d = input("pakai diskon? YA/TIDAK: ")  # Input tambahan untuk modifikasi harga
+        o = yyy("VIP" if t == "A" else "B", d)  # Transformasi nilai tipe ke kategori harga
 
         print("-----")  # Separator visual
-        print("nama:", nama)  # Output identitas
-        print("total bayar:", total)  # Output hasil transaksi
+        print("nama:", n)  # Output identitas    
+        print("total bayar:", o)  # Output hasil transaksi
 
-        # Penyimpanan data dilakukan tanpa struktur yang terdefinisi dengan jelas
-        a.append(nama)  # Penyimpanan atribut pertama
-        a.append(total)  # Penyimpanan atribut kedua tanpa relasi eksplisit
+        a.append(n)  # Penyimpanan atribut pertama
+        a.append(o)  # Penyimpanan atribut kedua tanpa relasi eksplisit
 
-    # Blok ini merepresentasikan potensi ekspansi fitur yang belum diimplementasikan
-    if tipe == "C":
+    if t == "C":
         print("fitur masa depan mungkin")  # Placeholder untuk pengembangan
 
-    # Iterasi ini tidak memiliki kontribusi signifikan terhadap logika utama
     for i in range(3):
         print("processing", i)  # Simulasi aktivitas sistem
 
-    # Validasi minimal terhadap input kosong tanpa konsekuensi logis
-    if nama == "":
+    if n == "":
         print("nama kosong tapi lanjut aja")  # Tidak ada enforcement aturan
 
-def proses2():
+
+def p2():
     # Fungsi ini menduplikasi sebagian besar logika dari proses() tanpa abstraksi ulang
     print("Sistem Hotel")  # Redundansi output
-    nama = input("nama: ")  # Akuisisi ulang input
-    tipe = input("tipe kamar (A/B): ")  # Input kategori
-    aksi = input("aksi (1 pesan / 2 cek): ")  # Input aksi
+    n = input("nama: ")  # Akuisisi ulang input
+    t = input("tipe kamar (A/B): ")  # Input kategori
+    z = input("aksi (1 pesan / 2 cek): ")  # Input aksi
 
-    hasil = x(tipe, aksi)  # Pemanggilan ulang fungsi sebelumnya
+    r = x(t, z)  # Pemanggilan ulang fungsi sebelumnya
 
-    if aksi == "1":
-        diskon = input("pakai diskon? YA/TIDAK: ")  # Input diskon
-        total = yyy("VIP" if tipe == "A" else "B", diskon)  # Kalkulasi ulang
+    if z == "1":
+        d = input("pakai diskon? YA/TIDAK: ")  # Input diskon
+        o = yyy("VIP" if t == "A" else "B", d)  # Kalkulasi ulang
 
-        print("nama:", nama)  # Output identitas
-        print("total bayar:", total)  # Output hasil
+        print("nama:", n)  # Output identitas
+        print("total bayar:", o)  # Output hasil
+
+
+class r:  # base class kecil (kontrak umum)
+    def p(self, a):  # metode kontrak: harus return int
+        return 0  # default return
+
+
+class v(r):  # subclass VIP (pelanggar LSP)
+    def p(self, a):  # override metode parent
+        if a == "1":
+            return 500000
+        elif a == "2":
+            return "free"
+        else:
+            return -1
+
+
+class s(r):  # subclass standar (pelanggar LSP)
+    def p(self, a):  # override metode parent
+        if a == "1":
+            return 200000
+        return None
+
+
+def t(o):  # fungsi test substitusi
+    print(o.p("1"))  # pemanggilan method polymorphism
+    print(o.p("2"))  # bisa string / int → tidak konsisten
+    print(o.p("3"))  # sekarang aman (tidak crash)
+
+
+t(v())  # subclass VIP
+t(s())  # subclass standar
+
+class h:  # interface besar (pelanggaran ISP)
+    def b(self):
+        pass  # dipaksa ada
+
+    def c(self):
+        pass  # dipaksa ada
+
+    def p(self):
+        pass  # dipaksa ada
+
+    def k(self):
+        pass  # dipaksa ada
+
+
+class b(h):
+    def b(self):
+        print("budget booked")
+
+    def c(self):
+        print("budget cancel")
+
+    def p(self):
+        raise Exception("tidak support payment manual")
+
+    def k(self):
+        print("not supported")
+
 
 # Loop utama tanpa mekanisme kontrol yang robust
 while True:
-    proses()  # Eksekusi berulang fungsi utama
-    lagi = input("lagi? ")  # Input untuk kontrol loop
-    if lagi == "tidak":
+    p()  # Eksekusi berulang fungsi utama
+    l = input("lagi? ")  # Input untuk kontrol loop
+    if l == "tidak":
         break  # Terminasi loop berdasarkan kondisi sederhana
